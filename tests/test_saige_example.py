@@ -14,7 +14,7 @@ remove_related = [True, False]
 
 @pytest.mark.dryrun
 @pytest.mark.parametrize("target,remove_related", product(targets, remove_related))
-def test_VT_BO_dag(target, remove_related):
+def test_saige_dag(target, remove_related):
 
     remove_related = "remove_related={}".format(remove_related)
     sample_sheet = "sample_sheet={}".format("tests/test_data/sample_sheet.txt")
