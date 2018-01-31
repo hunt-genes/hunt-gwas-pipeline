@@ -1,0 +1,22 @@
+before_script:
+  - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda config --add channels bioconda
+  - conda config --add channels r
+  - conda config --add channels conda-forge
+  # Useful for debugging any issues with conda
+  - conda info -a
+  - conda create -q -n test-environment python=3.6 numpy scipy pandas pytest pytest-xdist snakemake r r-matrix r-rcppeigen r-data.table r-rcppparallel r-rcpparmadillo r-rcpp lapack
+  - source activate test-environment
+  - wget https://cran.r-project.org/src/contrib/SPAtest_2.0.2.tar.gz
+  - R CMD INSTALL SPAtest_2.0.2.tar.gz
+  - wget https://github.com/weizhouUMICH/SAIGE/raw/master/archived/SAIGE_0.20_R_x86_64-pc-linux-gnu.tar.gz
+  - R CMD INSTALL SAIGE_0.20_R_x86_64-pc-linux-gnu.tar.gz
+
+tests:
+  script:
+    - python -m pytest tests -m "not local"
