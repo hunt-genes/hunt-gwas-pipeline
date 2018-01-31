@@ -1,0 +1,6 @@
+channels:
+  - r
+dependencies:
+ # - r-plotrix
+ - r-data.table
+ # - r-rcolorbrewer

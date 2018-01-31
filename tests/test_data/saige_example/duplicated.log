@@ -1,0 +1,27 @@
+PLINK v1.90b4 64-bit (20 Mar 2017)
+Options in effect:
+  --file duplicated
+  --make-bed
+  --out duplicated
+
+Hostname: hunt-genes-home
+Working directory: /home/endrebak/code/gwas/tests/test_data/saige_example2
+Start time: Tue Jan 16 14:28:38 2018
+
+Random number seed: 1516109318
+193448 MB RAM detected; reserving 96724 MB for main workspace.
+Scanning .ped file... done.
+Performing single-pass .bed write (20000 variants, 1000 people).
+--file: duplicated-temporary.bed + duplicated-temporary.bim +
+duplicated-temporary.fam written.
+20000 variants loaded from .bim file.
+1000 people (0 males, 0 females, 1000 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to duplicated.nosex .
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 1000 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+20000 variants and 1000 people pass filters and QC.
+Note: No phenotypes present.
+--make-bed to duplicated.bed + duplicated.bim + duplicated.fam ... done.
+
+End time: Tue Jan 16 14:28:39 2018

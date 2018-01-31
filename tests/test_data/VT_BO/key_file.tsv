@@ -1,0 +1,8 @@
+name	version	type	covar_type	covar_name	description	N	N_cases	N_controls
+VT_BO	10.11.2017	binary	baseQcovar	BirthYear	VT_ICD_based	69422	3050	66372
+VT_BO	10.11.2017	binary	baseQcovar	PC1	VT_ICD_based	69422	3050	66372
+VT_BO	10.11.2017	binary	baseQcovar	PC2	VT_ICD_based	69422	3050	66372
+VT_BO	10.11.2017	binary	baseQcovar	PC3	VT_ICD_based	69422	3050	66372
+VT_BO	10.11.2017	binary	baseQcovar	PC4	VT_ICD_based	69422	3050	66372
+VT_BO	10.11.2017	binary	baseBcovar	batch	VT_ICD_based	69422	3050	66372
+VT_BO	10.11.2017	binary	addBCovar	Sex	VT_ICD_based	69422	3050	66372

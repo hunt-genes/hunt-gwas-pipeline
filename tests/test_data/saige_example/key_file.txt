@@ -1,0 +1,2 @@
+name	version	type	baseQcovar	baseBcovar	addQcovar	addBcovar	description	N	N_cases	N_controls
+TestPheno	30.05.85	binary	X2|X3				ICD_based	69422	3050	66372

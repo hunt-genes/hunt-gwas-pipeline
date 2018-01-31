@@ -1,0 +1,62 @@
+import pandas as pd
+
+# configfile: "config.yaml"
+rule all:
+    input:
+        "duplicated.ped",
+        "duplicated.bed"
+
+rule bed_to_ped:
+    input:
+        "plinkforGRM_1000samples_10kMarkers" + ".bim" # config["plink_binary_prefix"]
+    output:
+        "plink.ped", "plink.map"
+        # temp("plink.ped", "plink.map")
+    shell:
+        "plink --bfile plinkforGRM_1000samples_10kMarkers --recode"
+
+rule duplicate_genotypes:
+    input:
+        "plink.ped"
+    output:
+        "duplicated.ped"
+    run:
+        df = pd.read_table(input[0], sep=" ", header=None)
+        # df[0] = pd.Series(range(1000))
+        # df[1] = pd.Series(range(1000))
+
+        df2 = df.copy()
+        df2 = df2.loc[:, 6:]
+
+        # df2[0] += 1000
+        # df2[1] += 1000
+
+        df3 = pd.concat([df, df2], axis=1)
+
+        df3.to_csv(output[0], sep=" ", header=None, index=None)
+
+
+rule duplicate_info:
+    input:
+        "plink.map"
+    output:
+        "duplicated.map"
+    run:
+        df = pd.read_table(input[0], sep="\t", header=None)
+        df2 = df.copy()
+
+        new_ids = "rs" + pd.Series(range(10001, 20001)).astype(str)
+        df2.loc[:, 1] = new_ids
+        df2.loc[:, 0] = 2
+
+        df3 = pd.concat([df, df2])
+        df3.to_csv(output[0], sep="\t", index=False, header=False)
+
+
+rule duplicated_ped_to_bed:
+    input:
+        "duplicated.map", "duplicated.ped"
+    output:
+        "duplicated.bed"
+    shell:
+        "plink --file duplicated --make-bed --out duplicated"

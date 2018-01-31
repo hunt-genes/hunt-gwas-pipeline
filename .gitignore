@@ -1,0 +1,17 @@
+*.swp
+*.pyc
+.cache/
+
+private/
+
+*/__pycache__/
+
+*.kin0
+test/
+.snakemake/
+*.snakemake.*
+*#*
+
+*/html/*
+*/_static/*
+*/_build/*

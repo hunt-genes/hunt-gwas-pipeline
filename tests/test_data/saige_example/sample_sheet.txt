@@ -1,0 +1,3 @@
+Name	Path
+PART_01	tests/test_data/saige_example/dosage_10markers.txt
+PART_02	tests/test_data/saige_example/dosage2_10markers.txt

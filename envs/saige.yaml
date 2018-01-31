@@ -1,0 +1,9 @@
+channels:
+  - r
+dependencies:
+ - r-rcpp
+ - r-rcpparmadillo
+ - r-rcppparallel
+ - r-data.table
+ - r-rcppeigen
+ - r-matrix

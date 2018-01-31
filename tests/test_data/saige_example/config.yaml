@@ -1,0 +1,92 @@
+# Where to store intermediate files
+intermediate_prefix: temp/saige2
+
+# Final outfolder
+final_prefix: final/saige2
+
+phenotype_file: tests/test_data/saige_example/pheno_1000samples_for_check_input.txt
+key_file: tests/test_data/saige_example/key_file_improved.txt
+
+sample_sheet: tests/test_data/saige_example/sample_sheet.txt
+
+#####################
+# Extract unrelated #
+#####################
+
+remove_related: False
+
+# Used to extract unrelated
+plink_binary_prefix: tests/test_data/saige_example/duplicated
+
+# King kinship:
+king_kinship: tests/test_data/saige_example/king.kin0
+
+# Prioritize cases; (larger numbers have priority)
+prioritize: True
+
+# Prioritize smaller numbers
+flip_priority: False
+
+# A real number between zero and one which is the threshold for defining
+# unrelated elements. Elements separated at or below this threshold are deemed
+# to be unrelated.
+unrelated_threshold: 0.08838 # No second degree
+
+# with just one, the result is deterministic If this number is more than one, 20
+# for example, the program runs the stochastic heuristic 19 times and the greedy
+# heuristic once.
+number_of_runs: 2
+
+# optional
+seed: 1260646394
+
+################
+# SAIGE Step 1 #
+################
+
+center_variables:
+
+id_column: IID
+
+# integer (>0). Number of markers to be used for estimating the variance ratio.
+#           By default, 30
+number_of_markers: 30
+
+# logical. Whether tp skip fitting the null model and only calculating the
+#           variance ratio, By default, FALSE. If TRUE, the model file ".rda" is needed
+skip_model_fitting: False
+
+plink_binary_prefix_pruned: tests/test_data/saige_example/duplicated
+
+################
+# SAIGE Step 2 #
+################
+
+
+samples_in_dosage: tests/test_data/saige_example/sampleIDindosage.txt
+
+number_dosage_rows_to_skip: 1
+number_dosage_cols_to_skip: 6
+dosage_file_colnames_skip: "CHR SNP CM POS EFFECT_ALLELE ALT_ALLELE"
+
+dosage_chr_col: CHR
+dosage_snp_id_col: SNP
+dosage_pos_col: POS
+dosage_ref_allele_col: EFFECT_ALLELE
+dosage_alt_allele_col: ALT_ALLELE
+
+min_minor_allele_count: 1
+min_minor_allele_frequency: 0
+
+ # Minimum imputation info of markers to test (in bgen file)
+# minimum_imputation_info: 0.3
+
+# Whether to output allele frequency in cases and controls. By default, FALSE
+is_output_a_fin_case_ctrl: True
+
+###################
+# Manhattan plots #
+###################
+
+# 10^(logp_cutoff)
+logp_cutoff: 0

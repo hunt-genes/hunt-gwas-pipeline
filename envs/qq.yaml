@@ -1,0 +1,7 @@
+channels:
+  - bioconda
+  - r
+dependencies:
+ - r-data.table
+ - r-optparse
+ - r-rcolorbrewer
