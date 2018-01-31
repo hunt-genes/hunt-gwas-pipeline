@@ -6,7 +6,8 @@
 Welcome to the HUNT-GWAS-Pipeline documentation!
 ================================================
 
-.. image:: https://gitlab.com/huntgenes/gwas_pipeline/badges/master/build.svg
+.. image:: https://travis-ci.org/hunt-genes/hunt-gwas-pipeline.svg?branch=master
+    :target: https://travis-ci.org/hunt-genes/hunt-gwas-pipeline
 
 The HUNT-GWAS-Pipeline is a highly configurable pipeline that runs GWAS
 analyses, plots the results and creates ample logs to help you understand which
