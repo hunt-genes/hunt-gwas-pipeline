@@ -1,4 +1,8 @@
-before_script:
+language: python
+python:
+  - "3.6"
+
+install:
   - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
   - bash miniconda.sh -b -p $HOME/miniconda
   - export PATH="$HOME/miniconda/bin:$PATH"
@@ -17,6 +21,5 @@ before_script:
   - wget https://github.com/weizhouUMICH/SAIGE/raw/master/archived/SAIGE_0.20_R_x86_64-pc-linux-gnu.tar.gz
   - R CMD INSTALL SAIGE_0.20_R_x86_64-pc-linux-gnu.tar.gz
 
-tests:
-  script:
+script:
     - python -m pytest tests -m "not local"
