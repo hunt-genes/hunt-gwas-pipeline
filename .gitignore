@@ -16,3 +16,5 @@ test/
 */_static/*
 */_build/*
 temp/
+
+*.bkup

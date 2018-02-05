@@ -1,4 +1,4 @@
-rule saige_test_associate_snps_and_phenotype:
+rule saige_associate_snps_and_phenotype:
     input:
         rda = "{prefix}/data/saige_step1/{pheno}.rda",
         dosage = lambda w: dosages[w.chunk],

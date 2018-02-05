@@ -1,77 +1,181 @@
-# Where to store intermediate files
+# ===================================== #
+# HUNT-GWAS pipeline configuration file #
+# ===================================== #
+
+
+# ------- 
+# General 
+# -------
+# Settings common to all the targets.
+# Folder to store the intermediate results. Will be created if it does not
+# exist.
+# (Required)
 intermediate_prefix: intermediate/test
 
-# Final outfolder
+# Folder to store the final results. Will be created if it does not exist.
+# (Required)
 final_prefix: final/test
 
-phenotype_file: tests/test_data/VT_BO/phenotype_file.tsv
-key_file: tests/test_data/VT_BO/key_file.tsv
+# If set, ensures that Snakemake won't start unless you use the tmux session
+# manager.
+# (Not required)
+tmux: 
 
+# The sample sheet is a two column tab-separated file. The column names are Name
+# and Path. The first column should contain the name of the file, e.g. 'chr1' or
+# 'PART_05', while the second column should contain the path to the dosage or
+# vcf file (vcf not implemented yet).
+# (Required)
 sample_sheet: tests/test_data/sample_sheet.txt
 
-#####################
-# Extract unrelated #
-#####################
+# The key file is a file that describes the phenotypes and their covariates. It
+# should contain the following columns: name    version type    covar_type
+# covar_name      description     N       N_cases N_controls TestPheno
+# 30.05.85        binary  baseQcovar      X2      ICD_based       69422   3050
+# 66372 TestPheno 30.05.85        binary  baseQcovar      X3      ICD_based
+# 69422   3050    66372
+# (Required)
+key_file: tests/test_data/VT_BO/key_file.tsv
 
-remove_related: False
+# The phenotype_file is a tab-separated pedigree-like file that also contains
+# the values of the phenotypes/covariates as additional data. In the below
+# example, the first four columns are fixed, the rest are the names of the
+# phenotypes and covariates. FID     IID     PATID   MATID   TestPheno       X2
+# X3 1a1  1a1     0       0       0       1.51178116845085        1 1a2   1a2
+# 0       0       0       0.389843236411431       1 1a3   1a3     0       0
+# 0       -0.621240580541804      1 1a4   1a4     0       0       0
+# -2.2146998871775        1 ...
+# (Not required)
+phenotype_file: tests/test_data/VT_BO/phenotype_file.tsv
 
-# Used to extract unrelated
-plink_binary_prefix: tests/test_data/genotyped
 
-# King kinship:
-king_kinship: tests/test_data/king.kin0
 
-# Prioritize cases; (larger numbers have priority)
+# ----------------- 
+# Extract Unrelated 
+# -----------------
+# 
+# Whether to extract unrelated individuals using fastindep
+# (Not required)
+remove_related: 
+
+# Prefix to plink bed/bim/fam files to create the relationship matrix. Required
+# if remove_related is true.
+# (Not required)
+plink_binary_prefix: 
+
+# Path to king kinship file.
+# (Not required)
+king_kinship: 
+
+# Prioritize cases (larger numbers have priority)
+# (Not required)
 prioritize: True
 
 # Prioritize smaller numbers
-flip_priority: False
+# (Not required)
+flip_priority: 
 
 # A real number between zero and one which is the threshold for defining
 # unrelated elements. Elements separated at or below this threshold are deemed
-# to be unrelated.
-unrelated_threshold: 0.08838 # No second degree
+# to be unrelated. By default 0.8838 which means no second degree relatives.
+# (Not required)
+unrelated_threshold: 0.08838
 
-# with just one, the result is deterministic If this number is more than one, 20
-# for example, the program runs the stochastic heuristic 19 times and the greedy
+# If 1, the result is deterministic. If this number is more than one, 20 for
+# example, the program runs the stochastic heuristic 19 times and the greedy
 # heuristic once.
-number_of_runs: 2
+# (Not required)
+number_of_runs: 5
 
-# optional
+# Seed for heuristic unrelatedness algorithm.
+# (Not required)
 seed: 1260646394
 
-################
-# SAIGE Step 1 #
-################
 
+
+# ----------- 
+# Saige Step1 
+# -----------
+# 
+# Path to pruned plink files. Path to plink file to be used for calculating
+# elements of the genetic relationship matrix (GRM).
+# (Required)
+plink_binary_prefix_pruned: /mnt/scratch/hunt24chunks/genotyped_pruned
+
+# List of covariates to be centered around the mean.
+# (Not required)
 center_variables: BirthYear
 
+# Column name for the sample IDs in the phenotype file e.g. 'IID'
+# (Not required)
 id_column: IID
 
 # integer (>0). Number of markers to be used for estimating the variance ratio.
-#           By default, 30
+# (Not required)
 number_of_markers: 30
 
-# logical. Whether tp skip fitting the null model and only calculating the
-#           variance ratio, By default, FALSE. If TRUE, the model file ".rda" is needed
-skip_model_fitting: False
 
 
-################
-# SAIGE Step 2 #
-################
+# ------------ 
+# Saige Step 2 
+# ------------
+# 
+# Path to file that contains one column of the sample IDs in the dosage, vcf or
+# bgen file (no header allowed)
+# (Required)
+samples_in_dosage: /mnt/scratch/hunt24chunks/Iid.txt
 
-plink_binary_prefix_pruned: tests/test_data/genotyped_pruned
+# Number of (non-data) rows to skip in the dosage file.
+# (Required)
+number_dosage_rows_to_skip: 1
 
-samples_in_dosage: tests/test_data/Iid.txt
-
-number_dosage_rows_to_skip: 0
+# Number of (non-data) cols to skip in the dosage file.
+# (Required)
 number_dosage_cols_to_skip: 5
 
+# The column names of the skipped columns in the dosage. Should contain the same
+# number of elements as number_dosage_cols_to_skip.
+# (Required)
+dosage_file_colnames_skip: ['ID', 'CHROM', 'POS', 'REF', 'ALT']
+
+# name of chromosome column in dosage file
+# (Not required)
+dosage_chr_col: CHROM
+
+# name of snp id column in dosage file
+# (Not required)
+dosage_snp_id_col: ID
+
+# name of position column in dosage file
+# (Not required)
+dosage_pos_col: POS
+
+# name of reference allele column in dosage file
+# (Not required)
+dosage_ref_allele_col: REF
+
+# name of alternate allele column in dosage file
+# (Not required)
+dosage_alt_allele_col: ALT
+
+# Minimum minor allele count of markers to test. The higher threshold between
+# minMAC and minMAF will be used
+# (Required)
 min_minor_allele_count: 1
-min_minor_allele_frequency: 0
 
- # Minimum imputation info of markers to test (in bgen file)
-minimum_imputation_info: 0.3
+# Minimum minor allele frequency of markers to test. The higher threshold
+# between minMAC and minMAF will be used
+# (Required)
+min_minor_allele_frequency: 
 
+
+
+# --------------- 
+# Manhattan Plots 
+# ---------------
+# 
+# An integer that decides the logp-cutoff for the Manhattan plots.
+# (10^logp_cutoff).
+# (Not required)
 logp_cutoff: 6
+

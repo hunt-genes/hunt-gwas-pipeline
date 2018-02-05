@@ -3,6 +3,11 @@ import pandas as pd
 if not config:
     configfile: "config.yaml"
 
+dosage_column_names = "dosage_chr_col dosage_snp_id_col dosage_pos_col dosage_ref_allele_col dosage_alt_allele_col"
+for k in dosage_column_names.split():
+    assert config[k] in config["dosage_file_colnames_skip"], "Mismatch in dosage_file_colnames_skip and dosage_column names in config"
+
+
 # pheno keys
 pk = pd.read_table(config["key_file"])
 
