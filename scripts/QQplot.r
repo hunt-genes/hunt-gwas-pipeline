@@ -1,5 +1,5 @@
 options(stringsAsFactors=F)
-## library("plotrix")
+library("plotrix")
 library("data.table")
 library("RColorBrewer")
 library("optparse")
@@ -63,7 +63,6 @@ parser <- OptionParser(usage="%prog [options]", option_list=option_list)
 
 args <- parse_args(parser, positional_arguments = 0)
 opt <- args$options
-print(opt)
 
 # horizontal lines and corresponding colors
 yLine <- c(-log10(5E-8))

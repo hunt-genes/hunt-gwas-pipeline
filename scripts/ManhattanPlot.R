@@ -1,7 +1,7 @@
 options(stringsAsFactors=F)
-# library("plotrix")
+library("plotrix")
 library("data.table")
-# library("RColorBrewer")
+library("RColorBrewer")
 library("optparse")
 
 option_list <- list(
