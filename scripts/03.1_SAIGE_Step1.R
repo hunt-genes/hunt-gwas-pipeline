@@ -19,22 +19,22 @@ covars = snakemake@params[["covariates"]]
 
 centerVariables = snakemake@params[["center_variables"]]
 
-#run step 1 to fit the null glmm model and estimate the constant of variance ratio
-fitNULLGLMM(plinkFile = plinkFile,
-            phenoFile = phenoFile,
-            phenoCol = phenoCol,
-            traitType = traitType,
-            invNormalize = FALSE,
-            covarColList = covars,
-            qCovarCol = NULL, # not implemented yet
-            sampleIDColinphenoFile = sampleIDColinphenoFile,
-            centerVariables = centerVariables,
-            tol=0.02,
-            maxiter=20,
-            tolPCG=1e-5,
-            maxiterPCG=500,
-            nThreads = nThreads,
-            Cutoff = 2,
-            numMarkers = numMarkers,
-            skipModelFitting = skipModelFitting,
-            outputPrefix = outputPrefix)
+#run step 1 to fit the null glmm model and estimate the constant of variance fitNULLGLMM
+ratio(plinkFile = plinkFile,
+      phenoFile = phenoFile,
+      phenoCol = phenoCol,
+      traitType = traitType,
+      invNormalize = FALSE,
+      covarColList = covars,
+      qCovarCol = NULL, # not implemented yet
+      sampleIDColinphenoFile = sampleIDColinphenoFile,
+      centerVariables = centerVariables,
+      tol=0.02,
+      maxiter=20,
+      tolPCG=1e-5,
+      maxiterPCG=500,
+      nThreads = nThreads,
+      Cutoff = 2,
+      numMarkers = numMarkers,
+      skipModelFitting = skipModelFitting,
+      outputPrefix = outputPrefix)
