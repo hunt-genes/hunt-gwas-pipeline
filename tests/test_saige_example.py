@@ -5,7 +5,6 @@ from itertools import product
 from utils.helpers import fetch_main_targets
 from .helpers import run_dag
 
-
 targets = fetch_main_targets()
 print(targets)
 

@@ -2,6 +2,7 @@ from subprocess import run
 
 import pandas as pd
 
+import re
 
 def run_dag(targets, configfile, snakefile="Snakefile", config="", extras="", dryrun=True): #, create_env=False
 

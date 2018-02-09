@@ -5,6 +5,7 @@
 private/
 
 */__pycache__/
+.pytest*
 
 *.kin0
 test/

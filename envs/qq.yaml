@@ -1,7 +1,9 @@
 channels:
   - bioconda
   - r
+  - conda-forge
 dependencies:
  - r-data.table
  - r-optparse
  - r-rcolorbrewer
+ - r-plotrix

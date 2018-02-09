@@ -3,10 +3,11 @@
 # ===================================== #
 
 
-# ------- 
-# General 
+# -------
+# General
 # -------
 # Settings common to all the targets.
+
 # Folder to store the intermediate results. Will be created if it does not
 # exist.
 # (Required)
@@ -19,7 +20,7 @@ final_prefix: final/saige2
 # If set, ensures that Snakemake won't start unless you use the tmux session
 # manager.
 # (Not required)
-tmux: 
+tmux: False
 
 # The sample sheet is a two column tab-separated file. The column names are Name
 # and Path. The first column should contain the name of the file, e.g. 'chr1' or
@@ -50,22 +51,23 @@ phenotype_file: tests/test_data/saige_example/pheno_1000samples_for_check_input.
 
 
 
-# ----------------- 
-# Extract Unrelated 
 # -----------------
-# 
+# Extract Unrelated
+# -----------------
+# Remove related individuals from downstream analyses
+
 # Whether to extract unrelated individuals using fastindep
 # (Not required)
-remove_related: 
+remove_related: False
 
 # Prefix to plink bed/bim/fam files to create the relationship matrix. Required
 # if remove_related is true.
 # (Not required)
-plink_binary_prefix: 
+plink_binary_prefix: tests/test_data/saige_example/duplicated
 
 # Path to king kinship file.
 # (Not required)
-king_kinship: 
+king_kinship: tests/test_data/saige_example/king.kin0
 
 # Prioritize cases (larger numbers have priority)
 # (Not required)
@@ -73,7 +75,7 @@ prioritize: True
 
 # Prioritize smaller numbers
 # (Not required)
-flip_priority: 
+flip_priority: False
 
 # A real number between zero and one which is the threshold for defining
 # unrelated elements. Elements separated at or below this threshold are deemed
@@ -85,7 +87,7 @@ unrelated_threshold: 0.08838
 # example, the program runs the stochastic heuristic 19 times and the greedy
 # heuristic once.
 # (Not required)
-number_of_runs: 5
+number_of_runs: 2
 
 # Seed for heuristic unrelatedness algorithm.
 # (Not required)
@@ -93,18 +95,19 @@ seed: 1260646394
 
 
 
-# ----------- 
-# Saige Step1 
 # -----------
-# 
+# Saige Step1
+# -----------
+# Params for building model in SAIGE
+
 # Path to pruned plink files. Path to plink file to be used for calculating
 # elements of the genetic relationship matrix (GRM).
 # (Required)
-plink_binary_prefix_pruned: /mnt/scratch/hunt24chunks/genotyped_pruned
+plink_binary_prefix_pruned: tests/test_data/saige_example/duplicated
 
 # List of covariates to be centered around the mean.
 # (Not required)
-center_variables: 
+center_variables:
 
 # Column name for the sample IDs in the phenotype file e.g. 'IID'
 # (Not required)
@@ -114,16 +117,21 @@ id_column: IID
 # (Not required)
 number_of_markers: 30
 
+# Whether to skip fitting the null model and only calculating the variance ratio
+# (Not required)
+skip_model_fitting: False
 
 
-# ------------ 
-# Saige Step 2 
+
 # ------------
-# 
+# Saige Step 2
+# ------------
+# Params for finding sig SNPs in SAIGE
+
 # Path to file that contains one column of the sample IDs in the dosage, vcf or
 # bgen file (no header allowed)
 # (Required)
-samples_in_dosage: /mnt/scratch/hunt24chunks/Iid.txt
+samples_in_dosage: tests/test_data/saige_example/sampleIDindosage.txt
 
 # Number of (non-data) rows to skip in the dosage file.
 # (Required)
@@ -166,16 +174,16 @@ min_minor_allele_count: 1
 # Minimum minor allele frequency of markers to test. The higher threshold
 # between minMAC and minMAF will be used
 # (Required)
-min_minor_allele_frequency: 
+min_minor_allele_frequency: 0.0
 
 
 
-# --------------- 
-# Manhattan Plots 
 # ---------------
-# 
+# Manhattan Plots
+# ---------------
+# Settings for Manhattan plots
+
 # An integer that decides the logp-cutoff for the Manhattan plots.
 # (10^logp_cutoff).
 # (Not required)
-logp_cutoff: 6
-
+logp_cutoff: 0

@@ -7,14 +7,13 @@ rule saige_associate_snps_and_phenotype:
         spagmmat = f"{{prefix}}/data/saige_step1/{{pheno}}_{num_markers}markers.SAIGE.results.txt"
     output:
         "{prefix}/data/saige_step2/{pheno}_{chunk}.saige"
-    params:
-        trait_type = lambda w: pk.loc[pk.name == w.pheno].type.iloc[0],
-        covars = lambda w: list(pk.loc[pk.name == w.pheno, "covar_name"].dropna())
+    # params:
+    #     covars = lambda w: list(pk.loc[pk.name == w.pheno, "covar_name"].dropna())
     threads:
         1
     benchmark:
         "{prefix}/benchmarks/saige_step2/{pheno}_{chunk}.benchmark"
     singularity:
-        "shub://endrebak/singularity_recipes:saige_0_24"
+        "shub://endrebak/singularity_recipes:saige_0_25"
     script:
         "../../scripts//03.1_SAIGE_Step2.R"

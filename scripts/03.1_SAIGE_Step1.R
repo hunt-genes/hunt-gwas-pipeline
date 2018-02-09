@@ -28,7 +28,6 @@ fitNULLGLMM(plinkFile = plinkFile,
             covarColList = covars,
             qCovarCol = NULL, # not implemented yet
             sampleIDColinphenoFile = sampleIDColinphenoFile,
-            centerVariables = centerVariables,
             tol=0.02,
             maxiter=20,
             tolPCG=1e-5,

@@ -19,6 +19,6 @@ rule saige_fit_null_logistic_mixed_model:
     benchmark:
         "{prefix}/benchmarks/saige_step1/{pheno}.benchmark"
     singularity:
-        "shub://endrebak/singularity_recipes:saige_0_24"
+        "shub://endrebak/singularity_recipes:saige_0_25"
     script:
         "../../scripts/03.1_SAIGE_Step1.R"
