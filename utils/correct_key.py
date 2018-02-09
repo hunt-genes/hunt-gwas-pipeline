@@ -21,7 +21,7 @@ def tidy(df):
     mdf = ndf.melt(value_vars="addBcovar addQcovar baseBcovar baseQcovar".split(),
                    id_vars="description N N_cases N_controls type version name".split())
 
-    mdf = mdf.dropna().drop_duplicates()
+    mdf = mdf.fillna("NA").drop_duplicates()
 
     mdf = mdf.rename(columns={"variable": "covar_type", "value": "covar_name"})
 
