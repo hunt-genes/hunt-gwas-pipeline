@@ -2,15 +2,16 @@
 def maf_threshold(w):
 
     binary = pk.loc[pk.name == w.pheno].type.iloc[0] == "binary"
-    n_cases = pk.loc[pk.name == w.pheno].N_cases.iloc[0]
 
     min_mac = config["min_minor_allele_count"]
 
     if binary:
-        n_controls = pk[pk.name == w.pheno].N_controls.iloc[0] if binary else 0
+        n_controls = pk[pk.name == w.pheno].N_controls.iloc[0]
+        n_cases = pk.loc[pk.name == w.pheno].N_cases.iloc[0]
         maf = min_mac / (2 * min(n_cases, n_controls))
     else:
-        maf = min_mac / (2 * n_cases)
+        n = pk.loc[pk.name == w.pheno].N.iloc[0]
+        maf = min_mac / (2 * n)
 
     return maf
 
