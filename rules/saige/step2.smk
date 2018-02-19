@@ -2,7 +2,7 @@ rule saige_associate_snps_and_phenotype:
     input:
         rda = "{prefix}/data/saige_step1/{pheno}.rda",
         dosage = lambda w: dosages[w.chunk],
-        pheno = config["phenotype_file"] if not remove_related else "{prefix}/data/extract_unrelated/{pheno}_unrelated.txt",
+        pheno = lambda w: phenofile(w, config["phenotype_file"], remove_related, pheno_trait_type[w.pheno]),
         variance_ratio_file = "{prefix}/data/saige_step1/{pheno}.varianceRatio.txt",
         spagmmat = f"{{prefix}}/data/saige_step1/{{pheno}}_{num_markers}markers.SAIGE.results.txt"
     output:

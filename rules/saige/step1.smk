@@ -1,8 +1,19 @@
 
+def phenofile(w, pheno_file, extract_unrelated, covar_type):
+
+    if extract_unrelated:
+        f = "{prefix}/data/extract_unrelated/{pheno}_unrelated.txt"
+    elif covar_type == "quantitative":
+        f = "{prefix}/data/rntransform/{pheno}_rntransformed.txt"
+    else:
+        return pheno_file
+
+    return expand(f, **w)
+
 
 rule saige_fit_null_logistic_mixed_model:
     input:
-        pheno = config["phenotype_file"] if not remove_related else "{prefix}/data/extract_unrelated/{pheno}_unrelated.txt",
+        pheno = lambda w: phenofile(w, config["phenotype_file"], remove_related, pheno_trait_type[w.pheno]),
         plink_binary_pruned = config["plink_binary_prefix_pruned"] + ".bed"
     output:
         glmm_model_information = "{prefix}/data/saige_step1/{pheno}.rda",

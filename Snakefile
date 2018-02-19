@@ -11,14 +11,15 @@ for k in dosage_column_names.split():
 # pheno keys
 pk = pd.read_table(config["key_file"])
 
+
 phenotypes = pk.name
 pheno_trait_type = {k: v for k, v in zip(phenotypes, pk["type"])}
+pheno_continuous = list(pheno_trait_type.values())[0] == "quantitative"
 
 dosage_df = pd.read_table(config["sample_sheet"])
 dosages = {k: v for k, v in zip(dosage_df.Name, dosage_df.Path)}
 
 prefix = config["intermediate_prefix"]
-# base_prefix = "/home/endrebak/code/gwas"
 
 remove_related = config["remove_related"]
 
@@ -32,7 +33,7 @@ num_markers = config["number_of_markers"]
 pheno_all = list(phenotypes)
 
 # "check_input/check_input"
-to_include = ["fastindep/fastindep", "saige/step1",
+to_include = ["fastindep/fastindep", "rntransform/rntransform", "saige/step1",
               "saige/step2", "collect_chunks/collect_chunks",
               "prepare_for_plotting/prepare_for_plotting", "qqplot/qqplot",
               "manhattan/manhattan"]
