@@ -8,7 +8,7 @@ if pheno_contains_continuous:
         output:
             "{prefix}/data/rntransform/{pheno}_rntransformed.txt"
         params:
-            continuous_phenotypes = [k for k, v in pheno_trait_type.keys() if v == "quantitative"]
+            continuous_phenotypes = [k for k, v in pheno_trait_type.items() if v == "quantitative"]
         conda:
             "../../envs/rntransform.yaml"
         script:
