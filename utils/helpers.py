@@ -14,8 +14,8 @@ def title(pk, w):
         n_controls = pk.loc[pk.name == w.pheno].N_controls.iloc[0]
 
         title = "".join([str(s) for s in ["Phenotype: ", trait, " Type: ",
-                                        trait_type + "\n(", n_cases, " cases versus ",
-                                        n_controls, " controls)"]])
+                                          trait_type + "\n(", n_cases, " cases versus ",
+                                          n_controls, " controls)"]])
 
     elif trait_type == "quantitative":
 
