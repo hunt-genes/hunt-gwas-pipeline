@@ -1,19 +1,14 @@
 
 
-# def rntransform_formula(w):
+if pheno_contains_continuous:
 
-#     right_covar_type = (pk.covar_type.isin(["addQcovar", "addBcovar"]))
-#     covariates = list(pk.loc[(pk.name == w.pheno) & right_covar_type].covar_name)
-
-#     return w.pheno + " ~ " + " + ".join(covariates)
-
-
-if pheno_continuous:
     rule rntransform:
         input:
-            config["phenotype_file"]
+            config["phenotype_file"] if not remove_related else "{prefix}/data/extract_unrelated/{pheno}_unrelated.txt"
         output:
             "{prefix}/data/rntransform/{pheno}_rntransformed.txt"
+        params:
+            continuous_phenotypes = [k for k, v in pheno_trait_type.keys() if v == "quantitative"]
         conda:
             "../../envs/rntransform.yaml"
         script:

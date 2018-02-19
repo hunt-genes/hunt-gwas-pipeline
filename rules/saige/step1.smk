@@ -1,10 +1,10 @@
 
-def phenofile(w, pheno_file, extract_unrelated, covar_type):
+def phenofile(w, pheno_file, pheno_contains_continuous, extract_unrelated, covar_type):
 
-    if extract_unrelated:
-        f = "{prefix}/data/extract_unrelated/{pheno}_unrelated.txt"
-    elif covar_type == "quantitative":
+    if pheno_contains_continuous:
         f = "{prefix}/data/rntransform/{pheno}_rntransformed.txt"
+    elif extract_unrelated:
+        f = "{prefix}/data/extract_unrelated/{pheno}_unrelated.txt"
     else:
         return pheno_file
 
@@ -13,7 +13,8 @@ def phenofile(w, pheno_file, extract_unrelated, covar_type):
 
 rule saige_fit_null_logistic_mixed_model:
     input:
-        pheno = lambda w: phenofile(w, config["phenotype_file"], remove_related, pheno_trait_type[w.pheno]),
+        pheno = lambda w: phenofile(w, config["phenotype_file"],
+                                    pheno_contains_continuous, remove_related, pheno_trait_type[w.pheno]),
         plink_binary_pruned = config["plink_binary_prefix_pruned"] + ".bed"
     output:
         glmm_model_information = "{prefix}/data/saige_step1/{pheno}.rda",
@@ -23,7 +24,6 @@ rule saige_fit_null_logistic_mixed_model:
         plink_prefix = config["plink_binary_prefix_pruned"],
         trait_type = lambda w: pheno_trait_type[w.pheno],
         covariates = lambda w: list(pk.loc[pk.name == w.pheno].covar_name),
-        center_variables = config["center_variables"],
         output_prefix = "{prefix}/data/saige_step1/{pheno}"
     threads:
         48

@@ -14,7 +14,7 @@ pk = pd.read_table(config["key_file"])
 
 phenotypes = pk.name
 pheno_trait_type = {k: v for k, v in zip(phenotypes, pk["type"])}
-pheno_continuous = list(pheno_trait_type.values())[0] == "quantitative"
+pheno_contains_continuous = "quantitative" in pheno_trait_type.values()
 
 dosage_df = pd.read_table(config["sample_sheet"])
 dosages = {k: v for k, v in zip(dosage_df.Name, dosage_df.Path)}

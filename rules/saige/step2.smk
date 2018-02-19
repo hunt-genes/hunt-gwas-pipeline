@@ -1,14 +1,13 @@
 rule saige_associate_snps_and_phenotype:
     input:
+        pheno = lambda w: phenofile(w, config["phenotype_file"],
+                                    pheno_contains_continuous, remove_related, pheno_trait_type[w.pheno]),
         rda = "{prefix}/data/saige_step1/{pheno}.rda",
         dosage = lambda w: dosages[w.chunk],
-        pheno = lambda w: phenofile(w, config["phenotype_file"], remove_related, pheno_trait_type[w.pheno]),
         variance_ratio_file = "{prefix}/data/saige_step1/{pheno}.varianceRatio.txt",
         spagmmat = f"{{prefix}}/data/saige_step1/{{pheno}}_{num_markers}markers.SAIGE.results.txt"
     output:
         "{prefix}/data/saige_step2/{pheno}_{chunk}.saige"
-    # params:
-    #     covars = lambda w: list(pk.loc[pk.name == w.pheno, "covar_name"].dropna())
     threads:
         1
     benchmark:
