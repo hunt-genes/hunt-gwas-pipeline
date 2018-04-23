@@ -36,4 +36,5 @@ fitNULLGLMM(plinkFile = plinkFile,
             Cutoff = 2,
             numMarkers = numMarkers,
             skipModelFitting = skipModelFitting,
-            outputPrefix = outputPrefix)
+            outputPrefix = outputPrefix,
+            memoryChunk = 2)

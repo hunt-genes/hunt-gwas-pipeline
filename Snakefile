@@ -43,9 +43,9 @@ for rule in to_include:
     include: "rules/{rule}.smk".format(rule=rule)
 
 
-rule all:
-    input:
-        expand("{prefix}/data/manhattan/{pheno}.imputed_Manhattan.png", prefix=prefix, pheno=pheno_all),
+# rule all:
+#     input:
+#         expand("{prefix}/data/manhattan/{pheno}.imputed_Manhattan.png", prefix=prefix, pheno=pheno_all),
         # expand("{prefix}/data/qqplot/{pheno}.QQ_Plot.png", prefix=prefix, pheno=pheno_all),
         # expand("{prefix}/data/manhattan/{pheno}.imputed_Manhattan.png", prefix=prefix, pheno=pheno_all)
 

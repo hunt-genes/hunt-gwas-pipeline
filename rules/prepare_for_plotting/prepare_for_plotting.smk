@@ -32,3 +32,17 @@ rule prepare_for_plotting:
         "{prefix}/benchmarks/prepare_for_plotting/{pheno}.benchmark"
     script:
         "./../../scripts/04_prepareResults.R"
+
+
+# rule prepare_for_plotting_saige:
+#     input:
+#         "{prefix}/data/collect_imputed_files/{pheno}.imputed.results"
+#     output:
+#         "{prefix}/data/imputed/{pheno}.final_results.txt"
+#     run:
+        # columns = "SNP	CHR     CM      POS     EFFECT_ALLELE   ALT_ALLELE      AC      AF      N       BETA    SE      Tstat   p.value p.value.NA      Is.SPA.converge varT    varTstar".split()
+
+        # usecols = "CHR SNP POS p.value AF BETA SE".split()
+        # df = pd.read_table(input[0], header=0)
+
+        # chisq = (df.BETA / df.SE) ** 2

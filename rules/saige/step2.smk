@@ -13,6 +13,6 @@ rule saige_associate_snps_and_phenotype:
     benchmark:
         "{prefix}/benchmarks/saige_step2/{pheno}_{chunk}.benchmark"
     singularity:
-        "shub://endrebak/singularity_recipes:saige_0_25"
+        "shub://endrebak/singularity_recipes:saige_0_26"
     script:
         "../../scripts//03.1_SAIGE_Step2.R"
