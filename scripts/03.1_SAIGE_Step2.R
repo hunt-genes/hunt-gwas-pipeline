@@ -1,4 +1,3 @@
-library(SAIGE)
 
 # check if openblas installed R
 require(inline)
@@ -11,8 +10,9 @@ openblas.set.num.threads <- cfunction(signature(ipt="integer"),
                                       convention = ".C"
                                       )
 
-openblas.set.num.threads(snakemake@threads)
+openblas.set.num.threads(1)
 
+library(SAIGE)
 ## openblas.set.num.threads(snakemake@threads)
 
 dosageFile = snakemake@input[["dosage"]]

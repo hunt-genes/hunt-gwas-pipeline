@@ -29,7 +29,6 @@ num_markers = config["number_of_markers"]
 
 pheno_all = list(phenotypes)
 
-# "check_input/check_input"
 to_include = ["fastindep/fastindep", "rntransform/rntransform", "saige/step1",
               "saige/step2", "collect_chunks/collect_chunks",
               "prepare_for_plotting/prepare_for_plotting", "qqplot/qqplot",
