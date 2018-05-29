@@ -1,5 +1,8 @@
 
 # check if openblas installed R
+
+if (!Sys.getenv("TRAVIS")){
+
 require(inline)
 
 openblas.set.num.threads <- cfunction(signature(ipt="integer"),
@@ -11,6 +14,7 @@ openblas.set.num.threads <- cfunction(signature(ipt="integer"),
                                       )
 
 openblas.set.num.threads(1)
+}
 
 library(SAIGE)
 ## openblas.set.num.threads(snakemake@threads)
