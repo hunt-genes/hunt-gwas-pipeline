@@ -1,7 +1,7 @@
 
 # check if openblas installed R
 
-if (!Sys.getenv("TRAVIS")){
+if (Sys.getenv("TRAVIS") == ""){
 
 require(inline)
 
