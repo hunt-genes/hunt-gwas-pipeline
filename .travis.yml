@@ -18,7 +18,7 @@ install:
   - source activate test-environment
   - wget https://cran.r-project.org/src/contrib/SPAtest_2.0.2.tar.gz
   - R CMD INSTALL SPAtest_2.0.2.tar.gz
-  - wget 'https://www.dropbox.com/sh/zmlu1llpxd66pjl/AABVHRTalxCXjtxNhFm_PvnOa/SAIGE_0.25_R_x86_64-pc-linux-gnu.tar.gz?dl=0' -O SAIGE.tar.gz
+  - wget "https://www.dropbox.com/sh/zmlu1llpxd66pjl/AABd_qen1iNO929pTVGC-xU0a/SAIGE_0.29_R_x86_64-pc-linux-gnu.tar.gz?dl=0" -O SAIGE.tar.gz
   - R CMD INSTALL SAIGE.tar.gz
 
 script:
