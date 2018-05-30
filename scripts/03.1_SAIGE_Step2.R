@@ -14,6 +14,7 @@ openblas.set.num.threads <- cfunction(signature(ipt="integer"),
                                       )
 
 openblas.set.num.threads(1)
+
 }
 
 library(SAIGE)

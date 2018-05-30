@@ -38,24 +38,25 @@ to_include = ["fastindep/fastindep", "rntransform/rntransform", "saige/step1",
 for rule in to_include:
     include: "rules/{rule}.smk".format(rule=rule)
 
+qq = expand("{prefix}/data/qqplot/{pheno}.QQ_Plot.png", prefix=prefix, pheno=pheno_all)
+manhattan = expand("{prefix}/data/manhattan/{pheno}.imputed_Manhattan.png", prefix=prefix, pheno=pheno_all)
+imputation = expand("{prefix}/data/collect_imputed_files/{pheno}.imputed.results", prefix=prefix, pheno=pheno_all)
 
-# rule all:
-#     input:
-#         expand("{prefix}/data/manhattan/{pheno}.imputed_Manhattan.png", prefix=prefix, pheno=pheno_all),
-        # expand("{prefix}/data/qqplot/{pheno}.QQ_Plot.png", prefix=prefix, pheno=pheno_all),
-        # expand("{prefix}/data/manhattan/{pheno}.imputed_Manhattan.png", prefix=prefix, pheno=pheno_all)
+rule all:
+    input:
+        [qq, manhattan, imputation]
 
 
 rule qq:
     input:
-        expand("{prefix}/data/qqplot/{pheno}.QQ_Plot.png", prefix=prefix, pheno=pheno_all)
+        qq
 
 
 rule manhattan:
     input:
-        expand("{prefix}/data/manhattan/{pheno}.imputed_Manhattan.png", prefix=prefix, pheno=pheno_all)
+        manhattan
 
 
 rule imputation:
     input:
-        expand("{prefix}/data/collect_imputed_files/{pheno}.imputed.results", prefix=prefix, pheno=pheno_all)
+        imputation
