@@ -9,7 +9,7 @@ rule saige_associate_snps_and_phenotype:
     output:
         "{prefix}/data/saige_step2/{pheno}_{chunk}.saige"
     threads:
-        1
+        24
     benchmark:
         "{prefix}/benchmarks/saige_step2/{pheno}_{chunk}.benchmark"
     singularity:
